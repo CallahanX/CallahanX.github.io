@@ -173,27 +173,29 @@
   function initEye() {
     const svg = $('#cyber-eye');
     const iris = $('#iris');
+    const pupil = $('#pupil');
     if (!svg || !iris) return;
 
-    const MAX_X = 62;  // iris yatay sınırı (SVG birimi)
-    const MAX_Y = 30;  // iris dikey sınırı
+    const MAX_X = 108;   // iris yatay hareket sınırı (SVG birimi)
+    const MAX_Y = 44;    // iris dikey hareket sınırı
+    const REACH_X = 220; // imleç bu kadar piksel yatay uzaklıkta -> tam yatay sapma
+    const REACH_Y = 140; // dikey eksen daha hassas: az mesafede tam sapma
+    const PUPIL_EXTRA = 0.1; // göz bebeği iris içinde ek kayma oranı
     const pos = { x: 0, y: 0 };
     const vel = { x: 0, y: 0 };
-    const STIFFNESS = 0.07;
-    const DAMPING = 0.80;
+    const STIFFNESS = 0.14;
+    const DAMPING = 0.72;
 
     function frame() {
       const r = svg.getBoundingClientRect();
       const cx = r.left + r.width / 2;
       const cy = r.top + r.height / 2;
-      const dx = mouse.x - cx;
-      const dy = mouse.y - cy;
-      const dist = Math.hypot(dx, dy) || 1;
-      const reach = clamp(dist / 260, 0, 1);       // imlece yaklaştıkça tam sınıra git
-      const tx = (dx / dist) * MAX_X * reach;
-      const ty = (dy / dist) * MAX_Y * reach;
 
-      // Yay-sönüm fiziği: yumuşak ve hafif "overshoot"lu takip
+      // Eksenler ayrı ölçeklenir: yukarı/aşağı hareket de net görünür
+      const tx = clamp((mouse.x - cx) / REACH_X, -1, 1) * MAX_X;
+      const ty = clamp((mouse.y - cy) / REACH_Y, -1, 1) * MAX_Y;
+
+      // Yay-sönüm fiziği: hızlı ama yumuşak takip
       vel.x += (tx - pos.x) * STIFFNESS;
       vel.y += (ty - pos.y) * STIFFNESS;
       vel.x *= DAMPING;
@@ -202,12 +204,13 @@
       pos.y += vel.y;
 
       // Elips sınırı içinde tut
-      const nx = pos.x / MAX_X;
-      const ny = pos.y / MAX_Y;
-      const m = Math.hypot(nx, ny);
+      const m = Math.hypot(pos.x / MAX_X, pos.y / MAX_Y);
       if (m > 1) { pos.x /= m; pos.y /= m; }
 
       iris.setAttribute('transform', `translate(${pos.x.toFixed(2)} ${pos.y.toFixed(2)})`);
+      if (pupil) {
+        pupil.setAttribute('transform', `translate(${(pos.x * PUPIL_EXTRA).toFixed(2)} ${(pos.y * PUPIL_EXTRA).toFixed(2)})`);
+      }
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
