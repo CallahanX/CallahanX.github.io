@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Doğukan Özkan (Callahan) - Bilgisayar Programcılığı Öğrencisi, Web & Bulut (AWS) Geliştirici Adayı kişisel portföyü.">
+  <meta name="theme-color" content="#050507">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23050507'/%3E%3Ctext x='32' y='45' font-size='38' text-anchor='middle' fill='%23FF1E42' font-family='monospace' font-weight='bold'%3EC%3C/text%3E%3C/svg%3E">
+  <title>Callahan | Doğukan Özkan - Geliştirici Portföyü</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
+
+  <!-- Arka plan kod yağmuru -->
+  <canvas id="code-rain" aria-hidden="true"></canvas>
+
+  <!-- Siber göz: sol ortada sabit, sayfayla birlikte gelir -->
+  <div class="eye-wrap">
+          <svg class="eye-svg" id="cyber-eye" viewBox="0 0 400 260" role="img" aria-label="İmleci takip eden neon mavi siber göz">
+            <defs>
+              <clipPath id="eye-clip">
+                <path d="M16 130 Q200 -10 384 130 Q200 270 16 130 Z"/>
+              </clipPath>
+              <radialGradient id="iris-grad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#00F0FF" stop-opacity=".55"/>
+                <stop offset="100%" stop-color="#00F0FF" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="neon" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2.2" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <g class="eye-body">
+              <!-- Göz hattı: ince ve yarı saydam, dolgu yok -->
+              <path d="M16 130 Q200 -10 384 130 Q200 270 16 130 Z" fill="none" stroke="#E60023" stroke-opacity=".35" stroke-width="1.5"/>
+              <path d="M40 130 Q200 20 360 130 Q200 240 40 130 Z" fill="none" stroke="#ffffff" stroke-opacity=".07" stroke-width="1" stroke-dasharray="3 7"/>
+
+              <!-- Sadece iris göz sınırları içinde hareket eder -->
+              <g clip-path="url(#eye-clip)">
+                <g id="iris" transform="translate(0 0)">
+                  <circle cx="200" cy="130" r="58" fill="url(#iris-grad)"/>
+                  <g class="eye-ring-spin">
+                    <circle cx="200" cy="130" r="50" fill="none" stroke="#00F0FF" stroke-width="1.8" stroke-dasharray="14 9" filter="url(#neon)"/>
+                  </g>
+                  <g class="eye-ring-spin-rev">
+                    <circle cx="200" cy="130" r="40" fill="none" stroke="#00F0FF" stroke-width="1.2" stroke-dasharray="2 6" opacity=".85"/>
+                  </g>
+                  <circle cx="200" cy="130" r="30" fill="none" stroke="#00F0FF" stroke-width="2" filter="url(#neon)"/>
+                  <circle cx="200" cy="130" r="21" fill="rgba(0,240,255,.12)" stroke="#00F0FF" stroke-width="1" opacity=".9"/>
+                  <circle class="eye-pupil-glow" cx="200" cy="130" r="13" fill="#00F0FF" filter="url(#neon)"/>
+                  <circle cx="200" cy="130" r="7" fill="#031a1d"/>
+                  <circle cx="195.5" cy="125.5" r="2.4" fill="#ffffff" opacity=".9"/>
+                </g>
+              </g>
+
+              <!-- Köşe noktaları -->
+              <circle cx="16" cy="130" r="2.5" fill="#E60023" opacity=".55"/>
+              <circle cx="384" cy="130" r="2.5" fill="#E60023" opacity=".55"/>
+            </g>
+          </svg>
+  </div>
+
+  <!-- Navigasyon -->
+  <header class="site-header">
+    <nav class="nav" aria-label="Ana menü">
+      <a href="index.html" class="brand">CALL<b>A</b>HAN</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="#hero" class="active">Ana Sayfa</a>
+        <a href="#hakkimda">Hakkımda</a>
+        <a href="#yetenekler">Yetenekler</a>
+        <a href="#terminal">Terminal</a>
+        <a href="projeler.html">Projeler</a>
+        <a href="projeler.html#iletisim">İletişim</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <div class="hero-kicker">&gt; SYSTEM.ONLINE // HOŞ GELDİN</div>
+          <h1>Doğukan <span class="accent glitch">Özkan</span></h1>
+          <div class="alias">Geliştirici Mahlası: <b>Callahan</b></div>
+          <div class="typing-line" aria-live="polite">
+            <span class="prompt">$</span> <span id="typing-text"></span><span class="caret"></span>
+          </div>
+          <p class="hero-desc">
+            Teoride kalmayan, ellerini kodla kirleten bir geliştirici. HTML, CSS ve JavaScript ile arayüzler kuruyor; AWS ve Linux üzerinde bulut altyapısı deniyor; fikirleri erken aşamada üretime dönüştürüyorum.
+          </p>
+          <div class="hero-cta">
+            <a href="projeler.html" class="btn">Projelerimi Gör &rarr;</a>
+            <a href="#terminal" class="btn btn-ghost">&gt;_ Terminali Aç</a>
+          </div>
+          <div class="hero-meta">
+            <span>OSTİM Teknik Üniversitesi</span>
+            <span>Bilgisayar Programcılığı</span>
+            <span>AWS · Linux · Web</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HAKKIMDA / VİZYON -->
+    <section id="hakkimda">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">// 01 · HAKKIMDA</span>
+          <h2 class="section-title">Vizyon &amp; <em>Kimlik</em></h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="about-grid">
+          <div class="card about-text reveal">
+            <p>
+              Ben <strong>Doğukan Özkan</strong>, geliştirici mahlasım <span class="hl">Callahan</span>. OSTİM Teknik Üniversitesi Bilişim Teknolojileri Meslek Yüksekokulu'nda <strong>Bilgisayar Programcılığı</strong> (1. sınıf) okuyor, web ve bulut (AWS) alanında kendimi geliştiriyorum.
+            </p>
+            <p>
+              Teknoloji ve yazılım dünyasında <strong>teoride kalmayıp ellerini kodla kirleten</strong> bir geliştiriciyim. Erken aşamada üretim yapmanın, geleceğin teknolojileri için sağlam bir temel attığına inanıyorum: önce yapar, sonra geliştirir, sürekli öğrenirim.
+            </p>
+            <p>
+              C ile sistem seviyesine, HTML/CSS/JavaScript ile arayüze, Linux ve AWS ile altyapıya dokunuyorum. Lisede Elektrik-Elektronik / Haberleşme Teknolojisi alanında okudum; bu donanım temeli, gömülü sistem projelerime yön veriyor.
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <ul class="info-list">
+              <li><span class="k">Ad</span><span class="v">Doğukan Özkan</span></li>
+              <li><span class="k">Mahlas</span><span class="v">Callahan</span></li>
+              <li><span class="k">Unvan</span><span class="v">Bilgisayar Programcılığı Öğrencisi</span></li>
+              <li><span class="k">Hedef</span><span class="v">Web &amp; Bulut (AWS) Geliştirici</span></li>
+              <li><span class="k">Kurum</span><span class="v">OSTİM Teknik Üniversitesi</span></li>
+              <li><span class="k">Birim</span><span class="v">Bilişim Teknolojileri MYO</span></li>
+              <li><span class="k">Sınıf</span><span class="v">1. Sınıf</span></li>
+              <li><span class="k">Lise</span><span class="v">OSTİM Şehit Alper Zor MTAL</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEKNİK YETENEKLER MATRİSİ -->
+    <section id="yetenekler">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">// 02 · TECH STACK</span>
+          <h2 class="section-title">Teknik <em>Yetenekler</em> Matrisi</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="skills-grid">
+          <div class="card skill-group reveal">
+            <h3><span class="ico">&lt;/&gt;</span> Diller</h3>
+            <div class="skill">
+              <div class="skill-row"><span>C</span><span class="pct">0%</span></div>
+              <div class="bar"><i data-level="70"></i></div>
+            </div>
+            <div class="skill">
+              <div class="skill-row"><span>HTML5</span><span class="pct">0%</span></div>
+              <div class="bar"><i data-level="90"></i></div>
+            </div>
+            <div class="skill">
+              <div class="skill-row"><span>CSS3</span><span class="pct">0%</span></div>
+              <div class="bar"><i data-level="85"></i></div>
+            </div>
+            <div class="skill">
+              <div class="skill-row"><span>JavaScript</span><span class="pct">0%</span></div>
+              <div class="bar"><i data-level="78"></i></div>
+            </div>
+          </div>
+
+          <div class="card skill-group reveal">
+            <h3><span class="ico">☁</span> Bulut, Sistem &amp; Araçlar</h3>
+            <div class="skill">
+              <div class="skill-row"><span>Linux (Ubuntu CLI)</span><span class="pct">0%</span></div>
+              <div class="bar"><i class="cyan" data-level="75"></i></div>
+            </div>
+            <div class="skill">
+              <div class="skill-row"><span>AWS EC2</span><span class="pct">0%</span></div>
+              <div class="bar"><i class="cyan" data-level="68"></i></div>
+            </div>
+            <div class="skill">
+              <div class="skill-row"><span>AWS S3</span><span class="pct">0%</span></div>
+              <div class="bar"><i class="cyan" data-level="72"></i></div>
+            </div>
+            <div class="skill">
+              <div class="skill-row"><span>Git &amp; GitHub</span><span class="pct">0%</span></div>
+              <div class="bar"><i class="cyan" data-level="80"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MİNİ TERMİNAL -->
+    <section id="terminal">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-tag">// 03 · INTERACTIVE</span>
+          <h2 class="section-title">Mini <em>Terminal</em></h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="terminal reveal" id="terminal-box">
+          <div class="term-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="term-title">callahan@portfolio: ~</span>
+          </div>
+          <div class="term-body" id="term-body">
+            <div id="term-output" aria-live="polite"></div>
+            <div class="term-input-row">
+              <span class="ps1">callahan<b>@portfolio</b>:~$</span>
+              <input type="text" id="term-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal komut satırı">
+            </div>
+          </div>
+        </div>
+        <div class="term-hints reveal">
+          Dene:
+          <button type="button" data-cmd="help">help</button>
+          <button type="button" data-cmd="projeler">projeler</button>
+          <button type="button" data-cmd="yetenekler">yetenekler</button>
+          <button type="button" data-cmd="sertifikalar">sertifikalar</button>
+          <button type="button" data-cmd="egitim">egitim</button>
+          <button type="button" data-cmd="iletisim">iletisim</button>
+          <button type="button" data-cmd="clear">clear</button>
+          <br>İpucu: <b>F12</b> ile geliştirici konsolunu da aç.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/do%C4%9Fukan-%C3%B6zkan-a53174336" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/CallahanX?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="mailto:dknozkn@gmail.com">E-posta</a>
+      </div>
+      <b>&lt;/&gt;</b> Doğukan Özkan <span class="sep">|</span> Callahan <span class="sep">|</span> © <span id="year">2026</span>
+      <span class="sep">|</span> OSTİM Teknik Üniversitesi · Web Teknolojileri Dersi Final Projesi
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
