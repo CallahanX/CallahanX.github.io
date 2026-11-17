@@ -11,7 +11,7 @@
    Örn: "https://proje-adin-default-rtdb.firebaseio.com"
    Boş/yanlış bırakırsan skorlar tarayıcıda (localStorage) tutulur.
    ---------------------------------------------------------- */
-const FIREBASE_DB_URL = "https://calllahan-default-rtdb.europe-west1.firebasedatabase.app";
+const FIREBASE_DB_URL = "BURAYA_FIREBASE_URL_GELECEK";
 
 
 (() => {
@@ -587,16 +587,42 @@ const FIREBASE_DB_URL = "https://calllahan-default-rtdb.europe-west1.firebasedat
     }
 
     /* ---------- hack ---------- */
+    // Alarm sesi: bu dosyayı music/ klasörüne koy (yoksa sessizce atlanır)
+    const ALERT_SOUND = 'music/alert.mp3';
+    let alertTimer = null;
+
+    function randomIP() {
+      const oct = () => 1 + Math.floor(Math.random() * 254);
+      let first;
+      do { first = 11 + Math.floor(Math.random() * 213); } while (first === 127);
+      return `${first}.${oct()}.${oct()}.${oct()}`;
+    }
+
+    function setEyeAlert(on) {
+      const eye = $('.eye-wrap');
+      if (eye) eye.classList.toggle('alert', on);
+    }
+
     function hackAlert() {
       const bar = n => '[' + '#'.repeat(n) + '.'.repeat(10 - n) + ']';
+      clearTimeout(alertTimer);
+      setEyeAlert(true);
+      try {
+        const snd = new Audio(ALERT_SOUND);
+        const p = snd.play();
+        if (p && p.catch) p.catch(() => {});
+      } catch (e) { /* ses yoksa sorun değil */ }
       printSeq([
         ['[!] YETKİSİZ ERİŞİM GİRİŞİMİ TESPİT EDİLDİ!', 'err'],
-        ['[!] IP adresiniz loglandı: 127.0.0.1 (kendi kendini hackliyorsun)', 'err'],
-        ['[*] Siber Vatan nöbetçisine bildirim gönderiliyor... ' + bar(3), 'dim'],
-        ['[*] Siber Vatan nöbetçisine bildirim gönderiliyor... ' + bar(7), 'dim'],
-        ['[*] Siber Vatan nöbetçisine bildirim gönderiliyor... ' + bar(10), 'dim'],
-        ['[✔] Şaka lan şaka gül diye :)> ', 'ok']
-      ], 600);
+        ['[!] IP adresiniz loglandı: ' + randomIP(), 'err'],
+        ['[*] Nöbetçiye bildirim gönderiliyor... ' + bar(3), 'dim'],
+        ['[*] Nöbetçiye bildirim gönderiliyor... ' + bar(7), 'dim'],
+        ['[*] Nöbetçiye bildirim gönderiliyor... ' + bar(10) + ' SALDIRI BAŞLADI!', 'err'],
+        ['[✔] Şaka lan şaka gül diye :)', 'ok']
+      ], 600, () => {
+        // Şaka bitti: göz 1.5 sn sonra normale dönsün
+        alertTimer = setTimeout(() => setEyeAlert(false), 1500);
+      });
     }
 
     /* ---------- Müzik çalar ---------- */

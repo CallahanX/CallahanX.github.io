@@ -747,3 +747,20 @@ section { padding: 90px 0; position: relative; }
   -webkit-user-select: none;
 }
 #term-input.bad { color: var(--red-neon); }
+
+
+/* ---------- Hack alarmı: göz büyür ve kızarır ---------- */
+.eye-wrap { transition: transform .6s var(--ease), opacity .4s; transform-origin: left center; }
+.eye-wrap .eye-svg .eye-body > path { transition: stroke-opacity .4s, stroke-width .4s; }
+.eye-wrap.alert { transform: translateY(-50%) scale(2.6); opacity: 1 !important; z-index: 20; }
+.eye-wrap.alert .eye-svg { animation: eye-alarm .5s ease-in-out infinite; }
+.eye-wrap.alert .eye-body > path { stroke-opacity: 1; stroke-width: 3; }
+.eye-wrap.alert [stroke="#00F0FF"] { stroke: var(--red-neon); }
+.eye-wrap.alert [fill="#00F0FF"] { fill: var(--red-neon); }
+.eye-wrap.alert [fill="rgba(0,240,255,.1)"] { fill: rgba(255, 30, 66, .18); }
+.eye-wrap.alert #iris-grad stop { stop-color: #FF1E42; }
+.eye-wrap.alert::before { background: radial-gradient(circle, rgba(255, 30, 66, .22), transparent 65%); }
+@keyframes eye-alarm {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(255, 30, 66, .5)); }
+  50% { filter: drop-shadow(0 0 22px rgba(255, 30, 66, 1)); }
+}
