@@ -595,7 +595,7 @@ const FIREBASE_DB_URL = "https://calllahan-default-rtdb.europe-west1.firebasedat
         ['[*] Siber Vatan nöbetçisine bildirim gönderiliyor... ' + bar(3), 'dim'],
         ['[*] Siber Vatan nöbetçisine bildirim gönderiliyor... ' + bar(7), 'dim'],
         ['[*] Siber Vatan nöbetçisine bildirim gönderiliyor... ' + bar(10), 'dim'],
-        ['[✔] Şaka! 😄 Hiçbir şey silinmedi, ben sadece bir portföy sitesiyim.', 'ok']
+        ['[✔] Şaka lan şaka gül diye :)> ', 'ok']
       ], 600);
     }
 
