@@ -11,7 +11,7 @@
    Örn: "https://proje-adin-default-rtdb.firebaseio.com"
    Boş/yanlış bırakırsan skorlar tarayıcıda (localStorage) tutulur.
    ---------------------------------------------------------- */
-const FIREBASE_DB_URL = "BURAYA_FIREBASE_URL_GELECEK";
+const FIREBASE_DB_URL = "https://calllahan-default-rtdb.europe-west1.firebasedatabase.app";
 
 
 (() => {
