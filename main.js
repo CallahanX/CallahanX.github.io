@@ -11,8 +11,7 @@
    Örn: "https://proje-adin-default-rtdb.firebaseio.com"
    Boş/yanlış bırakırsan skorlar tarayıcıda (localStorage) tutulur.
    ---------------------------------------------------------- */
-const FIREBASE_DB_URL = "BURAYA_FIREBASE_URL_GELECEK";
-
+const FIREBASE_DB_URL = "https://calllahan-default-rtdb.europe-west1.firebasedatabase.app";
 
 (() => {
   'use strict';
@@ -603,7 +602,7 @@ const FIREBASE_DB_URL = "BURAYA_FIREBASE_URL_GELECEK";
       if (eye) eye.classList.toggle('alert', on);
     }
 
-    function hackAlert() {
+  function hackAlert() {
       const bar = n => '[' + '#'.repeat(n) + '.'.repeat(10 - n) + ']';
       clearTimeout(alertTimer);
       setEyeAlert(true);
@@ -619,7 +618,7 @@ const FIREBASE_DB_URL = "BURAYA_FIREBASE_URL_GELECEK";
         ['[*] Nöbetçiye bildirim gönderiliyor... ' + bar(7), 'dim'],
         ['[*] Nöbetçiye bildirim gönderiliyor... ' + bar(10) + ' SALDIRI BAŞLADI!', 'err'],
         ['[✔] Şaka lan şaka gül diye :)', 'ok']
-      ], 600, () => {
+      ], 1350, () => {
         // Şaka bitti: göz 1.5 sn sonra normale dönsün
         alertTimer = setTimeout(() => setEyeAlert(false), 1500);
       });
